@@ -20,5 +20,6 @@ class App {
 		View *get_old_view() { return old_view; }
 		void set_view(View *new_view) { old_view = view; view = new_view; }
 		void set_running(bool val) { running = val; }
+		SDL_Window *get_window() { return win; }
 		~App();
 };

@@ -6,12 +6,12 @@
 class App;
 
 class View {
-	private:
+	protected:
 		App *app;
 
 	public:
 		View(App *app);
-		virtual void handle_event() = 0;
+		virtual void handle_event(SDL_Event event) = 0;
 		virtual void update(double dt) = 0;
 		virtual void paint(SDL_Renderer *rend) = 0;
 		App *get_app() { return app; }

@@ -1,0 +1,12 @@
+[]	Entity:
+	[]	Player:
+		[x] draw
+		[]	update
+		[]	keyboard handler
+	[]	Ball:
+		[]	update
+		[]	collisions
+[]	Settings:
+	[]	controls
+	[]	default values (speed, size, ...)
+	[]	skins maybe

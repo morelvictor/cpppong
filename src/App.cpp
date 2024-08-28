@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "Game.hpp"
+#include "constants.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ App::App() {
 		cout << "Problem at SDL initialisation" << endl;
 	}
 
-	win = SDL_CreateWindow("Pong", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+	win = SDL_CreateWindow(APP_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
 	if (!win) {
 		cout << "Problem at window creation" << endl;
 	}
@@ -33,11 +34,24 @@ void App::run() {
 			delete old_view;
 			old_view = view;
 		}
-		view->handle_event();
+		
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			switch(event.type) {
+				case SDL_QUIT:
+					running = false;
+					break;
+				default: break;
+			}
+
+			view->handle_event(event);
+		}
+		
 		view->update(dt);
 		view->paint(rend);
 		SDL_RenderPresent(rend);
 	}
+
 }
 
 void App::clean() {
