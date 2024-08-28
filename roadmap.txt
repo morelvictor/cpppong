@@ -1,6 +1,6 @@
 []	Entity:
 	[]	Player:
-		[x] draw
+		[x]	draw
 		[]	update
 		[]	keyboard handler
 	[]	Ball:
