@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-Entity::Entity(double x, double y, double width, double height, Game *game) {
+Entity::Entity(Game *game, double x, double y, double width, double height) {
 	this->x = x;
 	this->y = y;
 	this->width = width;
