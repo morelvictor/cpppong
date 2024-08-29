@@ -1,6 +1,6 @@
-[]	dt between frame
+[x]	dt between frame
 []	Entity:
-	[]	Player:
+	[x]	Player:
 		[x]	draw
 		[x]	update
 		[x]	keyboard handler

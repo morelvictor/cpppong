@@ -12,8 +12,8 @@ void Player::update_speed() {
 void Player::update_position(double dt) {
 	int win_height;
 	SDL_GetWindowSize(game->get_app()->get_window(), nullptr, &win_height);
-	if(y + dy >= 0 && y + dy + height < win_height) {
-		y += dy;
+	if(y + dy * dt >= 0 && y + height + dy * dt < win_height) {
+		y += dy * dt;
 	} else {
 		if(dy < 0) {
 			y = 0;
