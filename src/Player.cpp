@@ -3,6 +3,28 @@
 #include "constants.h"
 
 
+void Player::update_speed() {
+	if(go_up && !go_down) { dy = -DFL_RACK_SPEED; return; }
+	if(go_down && !go_up) { dy = DFL_RACK_SPEED; return; }
+	dy = 0;
+}
+
+void Player::update_position(double dt) {
+	int win_height;
+	SDL_GetWindowSize(game->get_app()->get_window(), nullptr, &win_height);
+	if(y + dy >= 0 && y + dy + height < win_height) {
+		y += dy;
+	} else {
+		if(dy < 0) {
+			y = 0;
+		}
+
+		if(dy > 0) {
+			y = win_height - height - 1;
+		}
+	}
+}
+
 Player::Player(Game *game, double x, SDL_Scancode key_up, SDL_Scancode key_down) : Entity(game, x, 0, DFL_RACK_WIDTH, DFL_RACK_HEIGHT){
 	int win_height;
 	SDL_GetWindowSize(game->get_app()->get_window(), nullptr, &win_height);
@@ -40,6 +62,8 @@ void Player::handle_event(SDL_Event event) {
 }
 
 void Player::update(double dt) {
+	update_speed();
+	update_position(dt);
 }
 
 void Player::draw(SDL_Renderer *rend) {

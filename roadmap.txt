@@ -1,7 +1,8 @@
+[]	dt between frame
 []	Entity:
 	[]	Player:
 		[x]	draw
-		[]	update
+		[x]	update
 		[x]	keyboard handler
 	[]	Ball:
 		[]	update

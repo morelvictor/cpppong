@@ -7,6 +7,7 @@ class Game;
 class Entity {
 	protected:
 		double x, y;
+		double dx, dy;
 		double width, height;
 		Game *game;
 
