@@ -10,8 +10,7 @@ void Player::update_speed() {
 }
 
 void Player::update_position(double dt) {
-	int win_height;
-	SDL_GetWindowSize(game->get_app()->get_window(), nullptr, &win_height);
+	int win_height = game->get_app()->get_height();
 	if(y + dy * dt >= 0 && y + height + dy * dt < win_height) {
 		y += dy * dt;
 	} else {
@@ -26,8 +25,7 @@ void Player::update_position(double dt) {
 }
 
 Player::Player(Game *game, double x, SDL_Scancode key_up, SDL_Scancode key_down) : Entity(game, x, 0, DFL_RACK_WIDTH, DFL_RACK_HEIGHT){
-	int win_height;
-	SDL_GetWindowSize(game->get_app()->get_window(), nullptr, &win_height);
+	int win_height = game->get_app()->get_height();
 	y = (win_height - DFL_RACK_HEIGHT) / 2;
 	this->key_up = key_up;
 	this->key_down = key_down;
@@ -64,12 +62,6 @@ void Player::handle_event(SDL_Event event) {
 void Player::update(double dt) {
 	update_speed();
 	update_position(dt);
-}
-
-void Player::draw(SDL_Renderer *rend) {
-	SDL_Rect rect = { (int) x, (int) y, (int) width, (int) height};
-	SDL_SetRenderDrawColor(rend, 0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
-	SDL_RenderFillRect(rend, &rect);
 }
 
 Player::~Player() {

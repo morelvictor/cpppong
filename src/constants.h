@@ -7,3 +7,4 @@
 #define DFL_RACK_WIDTH 10
 #define DFL_RACK_HEIGHT 100
 #define DFL_RACK_SPEED 200
+#define DFL_BALL_RADIUS 10 // If ball is a square the lenght of a side is 2*DFL_BALL_RADIUS

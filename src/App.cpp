@@ -23,6 +23,7 @@ App::App() {
 		cout << "Problem at renderer creation" << endl;
 	}
 
+	SDL_GetWindowSize(win, &width, &height);
 	view = new Game(this);
 	old_view = view;
 }
@@ -32,13 +33,14 @@ void App::run() {
 	double dt = 0;
 	auto last_fps = chrono::high_resolution_clock::now();
 	while(running) {
+		SDL_GetWindowSize(win, &width, &height);
 		fps++;
 		auto start_time = chrono::high_resolution_clock::now();
 
 		chrono::duration<double> fps_dt = start_time - last_fps;
 		if(fps_dt.count() > 1) {
 			last_fps = start_time;
-			cout << fps << endl;
+			cout << "Fps: " << fps << endl;
 			fps = 0;
 		}
 
@@ -68,13 +70,13 @@ void App::run() {
 		chrono::duration<double> elapsed_time = end_time - start_time;
 		dt = elapsed_time.count();
 	}
-
 }
 
 void App::clean() {
 	SDL_DestroyRenderer(rend);
 	SDL_DestroyWindow(win);
 	SDL_Quit();
+	delete view;
 }
 
 App::~App() {
