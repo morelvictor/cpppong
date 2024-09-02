@@ -15,13 +15,23 @@ CollisionSide Ball::collide(Entity * entity, double nx, double ny) {
 		SDL_Rect ny_ball_rect = { (int) x, (int) ny, (int) width, (int) height };
 
 		if(SDL_HasIntersection(&nx_ball_rect, &racket_rect)) {
-			cout << "Touche cote" << endl;
-			return LEFT;
+			if (dx > 0) {
+				cout << "RIGHT" << endl;
+				return RIGHT;
+			} else {
+				cout << "LEFT" << endl;
+				return LEFT;
+			}
 		}
 
 		if(SDL_HasIntersection(&ny_ball_rect, &racket_rect)) {
-			cout << "touche vertical" << endl;
-			return TOP;
+			if (dy < 0) {
+				cout << "TOP" << endl;
+				return TOP;
+			} else {
+				cout << "BOTTOM" << endl;
+				return BOTTOM;
+			}
 		}
 	}
 
@@ -34,8 +44,8 @@ Ball::Ball(Game *game) : Entity(game, 0, 0, DFL_BALL_RADIUS * 2, DFL_BALL_RADIUS
 	x = (win_width - width) / 2;
 	y = (win_height - height) / 2;
 
-	dx = 100;
-	dy = 100;
+	dx = DFL_BALL_X_SPEED;
+	dy = DFL_BALL_Y_SPEED;
 }
 
 void Ball::update(double dt){
