@@ -1,0 +1,16 @@
+[x]	dt between frame
+[]	create a method that reset Entity, this method is called in the constructor
+[]	Entity:
+	[x]	Player:
+		[x]	draw
+		[x]	update
+		[x]	keyboard handler
+	[]	Ball:
+		[x]	update
+		[x]	collisions:
+			[] Issue: when the ball collide the top-left corner for example, there is a highly reproductible bug 
+[]	Scoreboard
+[]	Settings:
+	[]	controls
+	[]	default values (speed, size, ...)
+	[]	skins maybe
