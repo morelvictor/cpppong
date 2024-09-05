@@ -3,7 +3,8 @@
 #include <iostream>
 #include <SDL.h>
 #include <chrono>
-#include "Game.hpp"
+#include "GameView.hpp"
+#include "MenuView.hpp"
 #include "constants.h"
 
 using namespace std;
@@ -24,7 +25,7 @@ App::App() {
 	}
 
 	SDL_GetWindowSize(win, &width, &height);
-	view = new Game(this);
+	view = new MenuView(this);
 	old_view = view;
 }
 
@@ -63,6 +64,8 @@ void App::run() {
 		}
 		
 		view->update(dt);
+		SDL_SetRenderDrawColor(rend, 0, 0, 0, SDL_ALPHA_OPAQUE);
+		SDL_RenderClear(rend);
 		view->paint(rend);
 		SDL_RenderPresent(rend);
 

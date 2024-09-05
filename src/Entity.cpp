@@ -1,15 +1,13 @@
 #include "Entity.hpp"
 
-Entity::Entity(Game *game, double x, double y, double width, double height) {
+Entity::Entity(View *view, double x, double y, double width, double height) {
 	this->x = x;
 	this->y = y;
 	this->dx = this->dy = 0;
 	this->width = width;
 	this->height = height;
-	this->game = game;
+	this->view = view;
 }
-
-void Entity::handle_event(SDL_Event event) {}
 
 void Entity::draw(SDL_Renderer * rend) {
 	SDL_Rect rect = { (int) x, (int) y, (int) width, (int) height};

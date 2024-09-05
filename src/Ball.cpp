@@ -1,6 +1,6 @@
 #include "Ball.hpp"
 #include "constants.h"
-#include "Game.hpp"
+#include "GameView.hpp"
 #include <SDL.h>
 
 #include <iostream>
@@ -38,7 +38,7 @@ CollisionSide Ball::collide(Entity * entity, double nx, double ny) {
 	return NONE;
 }
 
-Ball::Ball(Game *game) : Entity(game, 0, 0, DFL_BALL_RADIUS * 2, DFL_BALL_RADIUS * 2){
+Ball::Ball(View *game) : Entity(game, 0, 0, DFL_BALL_RADIUS * 2, DFL_BALL_RADIUS * 2){
 	int win_width = game->get_app()->get_width();
 	int win_height = game->get_app()->get_height();
 	x = (win_width - width) / 2;
@@ -53,20 +53,20 @@ void Ball::update(double dt){
 	double ny = y + dy * dt;
 
 	if (nx < 0) {
-		game->ball_touch_left();
+		((GameView *) view)->ball_touch_left();
 		return;
 	}
 
-	if(nx >= game->get_app()->get_width()) {
-		game->ball_touch_right();
+	if(nx >= view->get_app()->get_width()) {
+		((GameView *) view)->ball_touch_right();
 		return;
 	}
 
-	if (ny < 0 || ny + height >= game->get_app()->get_height()) {
+	if (ny < 0 || ny + height >= view->get_app()->get_height()) {
 		scale_speed(1, -1);
 	}
 
-	Player *target = x < game->get_app()->get_width() / 2 ? game->get_player_left() : game->get_player_right();
+	Player *target = x < view->get_app()->get_width() / 2 ? ((GameView *) view)->get_player_left() : ((GameView *) view)->get_player_right();
 	switch (collide(target, nx, ny)) {
 		case LEFT:
 		case RIGHT:
