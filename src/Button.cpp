@@ -1,12 +1,14 @@
 #include "Button.hpp"
 #include "Entity.hpp"
+#include <string.h>
 
 #include <iostream>
 
 using namespace std;
 
-Button::Button(View *view, void (*on_clicked)(App *)) : Entity(view, 200, 200, 100, 100) {
+Button::Button(View *view, void (*on_clicked)(App *), char *label) : Entity(view, 200, 200, 100, 100) {
 	this->on_clicked = on_clicked;
+	strcpy(this->label, label);
 }
 
 void Button::handle_event(SDL_Event event) {

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <chrono>
 #include "GameView.hpp"
 #include "MenuView.hpp"
@@ -12,6 +13,15 @@ using namespace std;
 App::App() {
 	if(SDL_Init(SDL_INIT_VIDEO)) {
 		cout << "Problem at SDL initialisation" << endl;
+	}
+
+	if (TTF_Init() < 0) {
+		cout << "Error initializing SDL_ttf: " << TTF_GetError() << endl;
+	}
+
+	font = TTF_OpenFont("/System/Library/Fonts/Supplemental/Arial Black.ttf", 24);
+	if ( !font ) {
+		cout << "Failed to load font: " << TTF_GetError() << endl;
 	}
 
 	win = SDL_CreateWindow(APP_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DFL_WIN_WIDTH, DFL_WIN_HEIGHT, 0);

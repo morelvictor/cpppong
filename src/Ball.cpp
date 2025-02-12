@@ -83,6 +83,9 @@ void Ball::update(double dt){
 
 	x += dx * dt;
 	y += dy * dt;
+
+	dy *= 1 + (0.1 * dt);
+	dx *= 1 + (0.1 * dt);
 }
 
 Ball::~Ball() {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include "View.hpp"
 
 class View;
@@ -9,6 +10,7 @@ class App {
 	private:
 		SDL_Window *win;
 		SDL_Renderer *rend;
+		TTF_Font* font;
 		View *old_view;
 		View *view;
 		bool running = true;

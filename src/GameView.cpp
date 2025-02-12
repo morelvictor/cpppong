@@ -15,6 +15,8 @@ void GameView::reset() {
 
 	ball->set_x((win_width - ball->get_width()) / 2);
 	ball->set_y((win_height - ball->get_height()) / 2);
+	ball->set_dx(DFL_BALL_X_SPEED);
+	ball->set_dy(DFL_BALL_Y_SPEED);
 }
 
 GameView::GameView(App *app) : View(app) {
@@ -42,11 +44,19 @@ void GameView::paint(SDL_Renderer * rend) {
 	ball->draw(rend);
 }
 
+void GameView::show_score() {
+	printf("Left: %d, Right: %d\n", player_left->get_points(), player_right->get_points());
+}
+
 void GameView::ball_touch_left() {
+	player_right->add_point();
+	show_score();
 	reset();
 }
 
 void GameView::ball_touch_right() {
+	player_left->add_point();
+	show_score();
 	reset();
 }
 

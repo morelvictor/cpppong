@@ -16,6 +16,7 @@ class GameView: public View {
 		void handle_event(SDL_Event event) override;
 		void update(double dt) override;
 		void paint(SDL_Renderer *rend) override;
+		void show_score();
 		Player *get_player_left() { return player_left; }
 		Player *get_player_right() { return player_right; }
 		void ball_touch_left();
