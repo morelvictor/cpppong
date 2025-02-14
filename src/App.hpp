@@ -21,6 +21,7 @@ class App {
 		void run();
 		void clean();
 		View *get_old_view() { return old_view; }
+		TTF_Font *get_font() { return font; }
 		void set_view(View *new_view) { old_view = view; view = new_view; }
 		void set_running(bool val) { running = val; }
 		int get_width() { return width; }

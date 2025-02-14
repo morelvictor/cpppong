@@ -4,7 +4,6 @@
 #include <SDL.h>
 
 #include <iostream>
-using namespace std;
 
 CollisionSide Ball::collide(Entity * entity, double nx, double ny) {
 	SDL_Rect n_ball_rect = { (int) nx, (int) ny, (int) width, (int) height };
@@ -16,20 +15,20 @@ CollisionSide Ball::collide(Entity * entity, double nx, double ny) {
 
 		if(SDL_HasIntersection(&nx_ball_rect, &racket_rect)) {
 			if (dx > 0) {
-				cout << "RIGHT" << endl;
+				std::cout << "RIGHT" << std::endl;
 				return RIGHT;
 			} else {
-				cout << "LEFT" << endl;
+				std::cout << "LEFT" << std::endl;
 				return LEFT;
 			}
 		}
 
 		if(SDL_HasIntersection(&ny_ball_rect, &racket_rect)) {
 			if (dy < 0) {
-				cout << "TOP" << endl;
+				std::cout << "TOP" << std::endl;
 				return TOP;
 			} else {
-				cout << "BOTTOM" << endl;
+				std::cout << "BOTTOM" << std::endl;
 				return BOTTOM;
 			}
 		}

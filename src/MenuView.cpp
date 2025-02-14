@@ -8,7 +8,7 @@ void on_click_play(App *app) {
 }
 
 MenuView::MenuView(App *app) : View(app) {
-	play_button = new Button(this, on_click_play, "Play");
+	play_button = new Button(this, on_click_play, (char *) "Play", (app->get_width() - B_MENU_WIDTH) / 2, (app->get_height() - B_MENU_HEIGHT) / 2, B_MENU_WIDTH, B_MENU_HEIGHT); 
 }
 
 void MenuView::handle_event(SDL_Event event) {
