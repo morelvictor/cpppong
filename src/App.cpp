@@ -2,45 +2,55 @@
 
 #include <iostream>
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <chrono>
-#include "Game.hpp"
+#include "GameView.hpp"
+#include "MenuView.hpp"
 #include "constants.h"
 
-using namespace std;
 
 App::App() {
 	if(SDL_Init(SDL_INIT_VIDEO)) {
-		cout << "Problem at SDL initialisation" << endl;
+		std::cout << "Problem at SDL initialisation" << std::endl;
+	}
+
+	if (TTF_Init() < 0) {
+		std::cout << "Error initializing SDL_ttf: " << TTF_GetError() << std::endl;
+	}
+
+	font = TTF_OpenFont("/System/Library/Fonts/Supplemental/Arial Black.ttf", 24);
+	if ( !font ) {
+		std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
 	}
 
 	win = SDL_CreateWindow(APP_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DFL_WIN_WIDTH, DFL_WIN_HEIGHT, 0);
 	if (!win) {
-		cout << "Problem at window creation" << endl;
+		std::cout << "Problem at window creation" << std::endl;
 	}
 
 	rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(!rend) {
-		cout << "Problem at renderer creation" << endl;
+		std::cout << "Problem at renderer creation" << std::endl;
 	}
 
 	SDL_GetWindowSize(win, &width, &height);
-	view = new Game(this);
+	view = new MenuView(this);
 	old_view = view;
 }
 
 void App::run() {
 	int fps = 1;
 	double dt = 0;
-	auto last_fps = chrono::high_resolution_clock::now();
+	auto last_fps = std::chrono::high_resolution_clock::now();
 	while(running) {
 		SDL_GetWindowSize(win, &width, &height);
 		fps++;
-		auto start_time = chrono::high_resolution_clock::now();
+		auto start_time = std::chrono::high_resolution_clock::now();
 
-		chrono::duration<double> fps_dt = start_time - last_fps;
+		std::chrono::duration<double> fps_dt = start_time - last_fps;
 		if(fps_dt.count() > 1) {
 			last_fps = start_time;
-			cout << "Fps: " << fps << endl;
+			std::cout << "Fps: " << fps << std::endl;
 			fps = 0;
 		}
 
@@ -63,11 +73,13 @@ void App::run() {
 		}
 		
 		view->update(dt);
+		SDL_SetRenderDrawColor(rend, 0, 0, 0, SDL_ALPHA_OPAQUE);
+		SDL_RenderClear(rend);
 		view->paint(rend);
 		SDL_RenderPresent(rend);
 
-		auto end_time = chrono::high_resolution_clock::now();
-		chrono::duration<double> elapsed_time = end_time - start_time;
+		auto end_time = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed_time = end_time - start_time;
 		dt = elapsed_time.count();
 	}
 }
@@ -75,6 +87,7 @@ void App::run() {
 void App::clean() {
 	SDL_DestroyRenderer(rend);
 	SDL_DestroyWindow(win);
+	TTF_CloseFont(font);
 	SDL_Quit();
 	delete view;
 }

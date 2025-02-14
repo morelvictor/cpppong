@@ -8,7 +8,13 @@
 	[]	Ball:
 		[x]	update
 		[x]	collisions:
-			[] Issue: when the ball collide the top-left corner for example, there is a highly reproductible bug 
+			[] Issue: when the ball collide the top-left corner for example, there is a highly reproductible bug
+[]	Menu:
+	[]	Buttons:
+		[x]	Selectable
+		[x]	Clickable
+		[]	Centered
+		[]	Image or Text
 []	Scoreboard
 []	Settings:
 	[]	controls

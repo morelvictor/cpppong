@@ -2,7 +2,7 @@
 SRC_DIR = src
 BIN_DIR = .bin
 CC = g++
-FLAGS = -Wall -Wno-unused-command-line-argument -std=c++11 `sdl2-config --libs --cflags`
+FLAGS = -Wall -Wno-unused-command-line-argument -std=c++11 `sdl2-config --libs --cflags` -lSDL2_image -lSDL2_ttf
 EXE = pong
 
 SRC = $(wildcard $(SRC_DIR)/*.cpp)
@@ -22,7 +22,10 @@ $(SRC_DIR):
 $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)/$(SRC_DIR)
 
-.PHONY: clean
+.PHONY: clean run
+
+run: all
+	./pong
 
 clean:
 	rm -rf $(BIN_DIR)

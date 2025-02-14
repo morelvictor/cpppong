@@ -9,7 +9,7 @@ class Ball : public Entity {
 		CollisionSide collide(Entity *entity, double nx, double ny);
 
 	public:
-		Ball(Game *game);
+		Ball(View *game);
 		void update(double dt) override;
 		~Ball();
 };

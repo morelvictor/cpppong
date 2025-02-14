@@ -2,17 +2,17 @@
 
 #include <SDL.h>
 
-class Game;
+class View;
 
 class Entity {
 	protected:
 		double x, y;
 		double dx, dy;
 		double width, height;
-		Game *game;
+		View *view;
 
 	public:
-		Entity(Game *game, double x, double y, double width, double height);
+		Entity(View *view, double x, double y, double width, double height);
 		void scale_speed(double sx, double sy) { dx *= sx; dy *= sy; }
 		void set_x(double x) { this->x = x; }
 		void set_y(double y) { this->y = y; }
@@ -22,8 +22,8 @@ class Entity {
 		double get_y() { return y; }
 		double get_width() { return width; }
 		double get_height() { return height; }
-		virtual void handle_event(SDL_Event event);
-		virtual void update(double dt) = 0;
+		virtual void handle_event(SDL_Event event) {}
+		virtual void update(double dt) {}
 		virtual void draw(SDL_Renderer *rend);
 		~Entity();
 };
