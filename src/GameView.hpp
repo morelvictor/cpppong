@@ -3,6 +3,7 @@
 #include "View.hpp"
 #include "Player.hpp"
 #include "Ball.hpp"
+#include <iostream>
 
 class GameView: public View {
 	private:
@@ -10,6 +11,7 @@ class GameView: public View {
 		Player *player_right;
 		Ball *ball;
 		void reset();
+		bool running = true;
 
 	public:
 		GameView(App *app);

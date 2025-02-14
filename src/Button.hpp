@@ -3,9 +3,6 @@
 #include "Entity.hpp"
 #include "MenuView.hpp"
 
-#define B_MENU_WIDTH 100
-#define B_MENU_HEIGHT 100
-
 class Button : public Entity {
 	private:
 		bool selected = false;
