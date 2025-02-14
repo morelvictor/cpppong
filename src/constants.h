@@ -10,3 +10,5 @@
 #define DFL_BALL_X_SPEED 300
 #define DFL_BALL_Y_SPEED 200
 #define DFL_BALL_RADIUS 10 // If ball is a square the lenght of a side is 2*DFL_BALL_RADIUS
+#define B_MENU_WIDTH 100
+#define B_MENU_HEIGHT 100

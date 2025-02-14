@@ -2,6 +2,7 @@
 
 #include "constants.h"
 #include <SDL.h>
+#include "MenuView.hpp"
 
 void GameView::reset() {
 	int win_width = app->get_width();
@@ -27,15 +28,31 @@ GameView::GameView(App *app) : View(app) {
 }
 
 void GameView::handle_event(SDL_Event event) {
+	if (event.type == SDL_KEYDOWN) {
+		SDL_Scancode key_pressed = event.key.keysym.scancode;
+		if(key_pressed == SDL_SCANCODE_P) {
+			std::cout << "Pause" << std::endl;
+			running = !running;
+		}
+
+		if(key_pressed == SDL_SCANCODE_ESCAPE) {
+			std::cout << "Back to menu" << std::endl;
+			MenuView *menu_view = new MenuView(get_app());
+			get_app()->set_view(menu_view);
+		}
+	}
+
 	player_left->handle_event(event);
 	player_right->handle_event(event);
 	ball->handle_event(event);
 }
 
 void GameView::update(double dt) {
-	player_left->update(dt);
-	player_right->update(dt);
-	ball->update(dt);
+	if (running) {
+		player_left->update(dt);
+		player_right->update(dt);
+		ball->update(dt);
+	}
 }
 
 void GameView::paint(SDL_Renderer * rend) {
